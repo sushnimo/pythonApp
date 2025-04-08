@@ -1,3 +1,4 @@
+construct==2.8.10
 PyYAML
 Unidecode
 aiohttp
