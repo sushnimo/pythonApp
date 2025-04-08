@@ -699,20 +699,6 @@ files = [
 ]
 
 [[package]]
-name = "pymp4"
-version = "1.4.0"
-description = "Python parser for MP4 boxes"
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "pymp4-1.4.0-py3-none-any.whl", hash = "sha256:3401666c1e2a97ac94dffb18c5a5dcbd46d0a436da5272d378a6f9f6506dd12d"},
-    {file = "pymp4-1.4.0.tar.gz", hash = "sha256:bc9e77732a8a143d34c38aa862a54180716246938e4bf3e07585d19252b77bb5"},
-]
-
-[package.dependencies]
-construct = "2.5.2,<3.0"
-
-[[package]]
 name = "pyyaml"
 version = "6.0.1"
 description = "YAML parser and emitter for Python"
