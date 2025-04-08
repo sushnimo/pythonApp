@@ -8,7 +8,7 @@ import requests
 pssh = PSSH("AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEEmnzZpf3VPTm2bOJoR652I=")
 
 # load device
-device = Device.load("C:/Users/Sushant/Desktop/pywidevine/device.wvd")
+device = Device.load("device.wvd")
 
 # load cdm
 cdm = Cdm.from_device(device)
