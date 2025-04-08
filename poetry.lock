@@ -710,7 +710,7 @@ files = [
 ]
 
 [package.dependencies]
-construct = "2.8.10"
+construct = "2.8.10,<3.0"
 
 [[package]]
 name = "pyyaml"
