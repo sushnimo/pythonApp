@@ -20,7 +20,7 @@ session_id = cdm.open()
 challenge = cdm.get_license_challenge(session_id, pssh)
 
 # send license challenge (assuming a generic license server SDK with no API front)
-licence = requests.post("http://jtv.publicvm.com/tsky/widevine.php?id=78", data=challenge)
+licence = requests.post("http://jtv.jonatv.website/tsky/widevine.php?id=78", data=challenge)
 licence.raise_for_status()
 
 # parse license challenge
