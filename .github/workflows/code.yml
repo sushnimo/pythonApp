@@ -56,7 +56,9 @@ jobs:
     - name: Install flet-cli ${{ env.FLET_CLI_VERSION }}
       run: |
         python -m pip install --upgrade pip
-        pip freeze > requirements.txt
+        pip install construct==2.8.10
+        pip install pymp4 --no-deps
+        pip install -r requirements.txt
         pip install flet-cli==$FLET_CLI_VERSION
 
     - name: Flet Build Web
