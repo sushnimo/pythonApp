@@ -1,35 +1,52 @@
-from flask import Flask, request, Response
+from flask import Flask, request, jsonify
 from pywidevine.cdm import Cdm
 from pywidevine.device import Device
 from pywidevine.pssh import PSSH
-
 import requests
 
-# prepare pssh
-pssh = PSSH("AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEKPlJ4mcfldmnVmKlzbDDMg=")
+app = Flask(__name__)
 
-# load device
+# Load device once
 device = Device.load("device.wvd")
 
-# load cdm
-cdm = Cdm.from_device(device)
+@app.route('/get_keys', methods=['POST'])
+def get_keys():
+    data = request.json
+    pssh_str = data.get("pssh")
 
-# open cdm session
-session_id = cdm.open()
+    if not pssh_str:
+        return jsonify({"error": "Missing PSSH string"}), 400
 
-# get license challenge
-challenge = cdm.get_license_challenge(session_id, pssh)
+    try:
+        pssh = PSSH(pssh_str)
+        cdm = Cdm.from_device(device)
+        session_id = cdm.open()
 
-# send license challenge (assuming a generic license server SDK with no API front)
-licence = requests.post("https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000077&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTcyNTEyNzcyIiwiaXNlIjp0cnVlLCJqdGkiOiI2MzNkMmU2ZC0yOGI0LTQwYTctOGU0Ny0zNGVjMmJkNjczYzEiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ0MTEyMjg4LCJuYW1lIjoidXNoYSAuIiwiaWF0IjoxNzQ0MDk3NTg4LCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAwOTI3In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.RRPpn-pVTO9rjJpWzcfca_QUXM-vIWS9rrlBqkYjXPE", data=challenge)
-licence.raise_for_status()
+        # Generate license challenge
+        challenge = cdm.get_license_challenge(session_id, pssh)
 
-# parse license challenge
-cdm.parse_license(session_id, licence.content)
+        # Request license
+        license_url = "https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000077&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTcyNTEyNzcyIiwiaXNlIjp0cnVlLCJqdGkiOiI2MzNkMmU2ZC0yOGI0LTQwYTctOGU0Ny0zNGVjMmJkNjczYzEiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ0MTEyMjg4LCJuYW1lIjoidXNoYSAuIiwiaWF0IjoxNzQ0MDk3NTg4LCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAwOTI3In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.RRPpn-pVTO9rjJpWzcfca_QUXM-vIWS9rrlBqkYjXPE"
+        license_response = requests.post(license_url, data=challenge)
+        license_response.raise_for_status()
 
-# print keys
-for key in cdm.get_keys(session_id):
-    print(f"[{key.type}] {key.kid.hex}:{key.key.hex()}")
+        # Parse license
+        cdm.parse_license(session_id, license_response.content)
 
-# close session, disposes of session data
-cdm.close(session_id)
+        keys = [
+            {
+                "type": key.type,
+                "kid": key.kid.hex(),
+                "key": key.key.hex()
+            }
+            for key in cdm.get_keys(session_id)
+        ]
+
+        cdm.close(session_id)
+        return jsonify({"keys": keys})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000)
