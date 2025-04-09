@@ -49,10 +49,10 @@ class _Structures:
         "client_id" / Bytes(this.client_id_len)
     )
 
-    # - Removed system_id as it can be retrieved from the Client ID's DRM Certificate
+    # ✅ Fixed version field here:
     v1 = Struct(
         "signature" / magic,
-        "version" / Const(Int8ub, 1),
+        "version" / Const(1, Int8ub),  # <-- Corrected here
         "type_" / CEnum(
             Int8ub,
             **{t.name: t.value for t in DeviceTypes}
