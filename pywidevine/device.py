@@ -33,7 +33,7 @@ class _Structures:
     # - Removed vmp and vmp_len as it should already be within the Client ID
     v2 = Struct(
         "signature" / magic,
-        "version" / Const(Int8ub, 2),
+        "version" / Const(2, Int8ub),
         "type_" / CEnum(
             Int8ub,
             **{t.name: t.value for t in DeviceTypes}
