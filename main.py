@@ -62,5 +62,5 @@ if __name__ == '__main__':
     # print(f" * Access the API at: {public_url}/get-keys")
 
     # Run the Flask app
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=7999)
 
