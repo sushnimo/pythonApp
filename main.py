@@ -63,4 +63,9 @@ if __name__ == '__main__':
 
     # Run the Flask app
     app.run(host='0.0.0.0', port=8000)
+    httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
+    print('running server...')
+    httpd.serve_forever()
+  
+run()
 
