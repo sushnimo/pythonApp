@@ -26,9 +26,9 @@ def get_keys() -> Response:
         challenge = cdm.get_license_challenge(session_id, pssh)
 
         proxies = {
-            "http": "http://rukgppbz:7m1ljtkt5j20
+            "http": "http://rukgppbz:7m1ljtkt5j20@
 38.153.152.244:9594",
-            "https": "http://rukgppbz:7m1ljtkt5j20
+            "https": "http://rukgppbz:7m1ljtkt5j20@
 38.153.152.244:9594"
         }
 
