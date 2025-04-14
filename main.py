@@ -63,8 +63,8 @@ def get_keys() -> Response:
 
 if __name__ == '__main__':
     port = 5000
-    public_url = ngrok.connect(port).public_url
-    print(f" * Ngrok tunnel available at: {public_url}")
-    print(f" * Access the API at: {public_url}/get-keys?pssh=<your_pssh>&licence=<your_license_url>")
+   # public_url = ngrok.connect(port).public_url
+   # print(f" * Ngrok tunnel available at: {public_url}")
+   # print(f" * Access the API at: {public_url}/get-keys?pssh=<your_pssh>&licence=<your_license_url>")
 
     app.run(host='0.0.0.0', port=port)
