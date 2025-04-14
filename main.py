@@ -3,7 +3,7 @@ from pywidevine.cdm import Cdm
 from pywidevine.device import Device
 from pywidevine.pssh import PSSH
 import requests
-from pyngrok import ngrok
+#from pyngrok import ngrok
 
 app = Flask(__name__)
 
