@@ -11,7 +11,7 @@ app = Flask(__name__)
 def get_keys() -> Response:
     try:
         # prepare pssh
-        pssh = PSSH("AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEAqrGqFxzV2upZ2Ef8Zndfo=")
+        pssh = PSSH("AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEBCKHHDoMltMuNxawHiYaFI=")
 
         # load device
         device = Device.load("device.wvd")
@@ -27,7 +27,7 @@ def get_keys() -> Response:
 
         # send license challenge
         licence = requests.post(
-            "https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000077&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTcyNTEyNzcyIiwiaXNlIjp0cnVlLCJqdGkiOiIwMGJlMTMxMS03MjI1LTRjNTgtOGZmZS02OGJkNDkwNDY1MTMiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ0MzA4MjIxLCJuYW1lIjoidXNoYSAuIiwiaWF0IjoxNzQ0MjkzNTIxLCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAwOTI3In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.vjGaC1J-mA_7FonSUdxppyETyZpeNmjctZ6aqVolZuI",
+            "https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000077&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTcyNTEyNzcyIiwiaXNlIjp0cnVlLCJqdGkiOiI3MDhiMDczZS03ODE2LTQzMGEtODVhNy04NmJhMmFhNWFmOTgiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ0NjMzNTgxLCJuYW1lIjoidXNoYSAuIiwiaWF0IjoxNzQ0NjE4ODgxLCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAwOTI3In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.s3rNH0157iQyPy59EgiOjfVlaWH_Wjp78OLTBzGVHss",
             data=challenge
         )
         licence.raise_for_status()
