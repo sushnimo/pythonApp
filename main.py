@@ -35,8 +35,12 @@ def get_keys() -> Response:
         # Get license challenge
         challenge = cdm.get_license_challenge(session_id, pssh)
 
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+        }
+
         # Send license challenge
-        response = requests.post(license_url, data=challenge)
+        response = requests.post(license_url, data=challenge, headers=headers)
         response.raise_for_status()
 
         # Parse license
