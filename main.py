@@ -11,8 +11,8 @@ app = Flask(__name__)
 def get_keys() -> Response:
     try:
         # Get PSSH and license URL from query params
-        pssh_value = "AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEM/vBFx4B1mcvc2RLgoZ+7M="
-        license_url = "https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000077&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTcyNTEyNzcyIiwiaXNlIjp0cnVlLCJqdGkiOiJlNjcxNWYzNS0wOWZiLTQzNjAtYjRhZi1mNmU3MGM0Y2ZlODMiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ0NjQ4MzU0LCJuYW1lIjoidXNoYSAuIiwiaWF0IjoxNzQ0NjMzNjU0LCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAwOTI3In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.vSf1T2B_hOK_L-Dev5C5cVU_8-Yx4JI3xCS2aA7pHts"
+        pssh_value = "AAAAMnBzc2gAAAAA7e+LqXnWSs6jyCfc1R0h7QAAABISEIFrlmdj6VtdvHCh5xeGRK0="
+        license_url = "https://tataplay.live.ott.irdeto.com/Widevine/getlicense?CrmId=tatasky&AccountId=tatasky&ContentId=400000253&ls_session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNvbnRyb2xfc2lnbmluZ19rZXlfcHJvZHVjdGlvbl8xNzIyOTY3MDk3ODc1In0.eyJzdWIiOiIxMTA5NzQ3MjkzIiwiaXNlIjp0cnVlLCJqdGkiOiJmNGFkYmUzZS00ZTI2LTQ5MzUtYTI2ZC1kYmY3NDA0ZTY5NWEiLCJhaWQiOiJ0YXRhc2t5IiwiZXhwIjoxNzQ2MDU3NzQ5LCJuYW1lIjoiTXVrZXNoIEt1bWFyIiwiaWF0IjoxNzQ2MDQzMDQ5LCJlbnQiOlt7ImVwaWQiOiJTdWJzY3JpcHRpb25fQnJvd3Nlcl9TdHJlYW1pbmciLCJiaWQiOiIxMDAwMDAzMDU0In1dLCJpc3MiOiJ0cG1hX3dlYiJ9.m4OsY7cYJpdXrx9UeEfl1uNxdIehnLGsGz5MvKmOGYw"
 
         if not pssh_value or not license_url:
             return jsonify({
