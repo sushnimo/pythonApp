@@ -38,13 +38,13 @@ def get_keys() -> Response:
         }
 
         # Define proxy with authentication
-        proxies = {
-            "http": "http://Vv8IHp2g:kMhGaCi9XZ@103.172.84.179:50100",
-            "https": "http://Vv8IHp2g:kMhGaCi9XZ@103.172.84.179:50100"
-        }
+       # proxies = {
+       #     "http": "http://Vv8IHp2g:kMhGaCi9XZ@103.172.84.179:50100",
+       #     "https": "http://Vv8IHp2g:kMhGaCi9XZ@103.172.84.179:50100"
+       # }
 
         # Send license request using proxy
-        response = requests.post(license_url, data=challenge, headers=headers, proxies=proxies)
+        response = requests.post(license_url, data=challenge, headers=headers)
         response.raise_for_status()
 
         # Parse license and extract keys
